@@ -1,4 +1,4 @@
-var Docker = require('Dockerode');
+var Docker = require('dockerode');
 var docker = new Docker();
 var streamHandler = require('./stream-handler');
 
