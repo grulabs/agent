@@ -1,0 +1,10 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/socket.io/socket.io.js')
+    script.
+      var socket = io('http://' + location.host, {query: 'satya=test'});
+  body
+    block content
