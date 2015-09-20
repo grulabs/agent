@@ -6,6 +6,8 @@ var AWS = require('aws-sdk');
 var ecs = new AWS.ECS({apiVersion: '2014-11-13', region: 'us-east-1'});
 var findPort = require('find-port');
 
+var counter = 0;
+
 function createContainer(id, image, args, cb){
 
 	// Create new task definition
@@ -119,13 +121,13 @@ router.post('/port', function(req, res, next) {
             if (splitVar[1] === taskId) {
               var ipAddr = data.NetworkSettings.IPAddress
               findPort(50000, 60000, function(ports) {
-                  var cmd = 'sudo iptables -t nat -A  DOCKER -p tcp --dport ' + ports[0] + ' -j DNAT --to-destination ' + ipAddr + ':' + port;
+                  var cmd = 'sudo iptables -t nat -A  DOCKER -p tcp --dport ' + ports[counter++] + ' -j DNAT --to-destination ' + ipAddr + ':' + port;
                   var exec = require('child_process').exec;
                   console.log(cmd);
                   exec(cmd, function (err, stdout, stderr) {
                     console.log('in exec');
                     if (!err) console.log('error: ' + err);
-                    res.json({port: ports[0]});
+                    res.json({port: ports[counter++]});
                   });
               });
             }
