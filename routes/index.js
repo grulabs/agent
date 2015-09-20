@@ -121,7 +121,7 @@ router.post('/port', function(req, res, next) {
             if (splitVar[1] === taskId) {
               var ipAddr = data.NetworkSettings.IPAddress
               findPort(50000, 60000, function(ports) {
-                  var cmd = 'sudo iptables -t nat -A  DOCKER -p tcp --dport ' + ports[counter++] + ' -j DNAT --to-destination ' + ipAddr + ':' + port;
+                  var cmd = 'sudo iptables -t nat -A  DOCKER -p tcp --dport ' + ports[counter] + ' -j DNAT --to-destination ' + ipAddr + ':' + port;
                   var exec = require('child_process').exec;
                   console.log(cmd);
                   exec(cmd, function (err, stdout, stderr) {
