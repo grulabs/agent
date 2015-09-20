@@ -59,3 +59,8 @@ body {
 	background: #f58b5d;
 
 }
+
+iframe {
+    width: 800px;
+    height: 600px;
+}
