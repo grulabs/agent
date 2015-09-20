@@ -1,4 +1,19 @@
 extends layout
 
 block content
-  p Welcome
+
+	.main
+		.contents
+			h1.title Whatever
+			button.button-1 Launch
+	script.
+		$('.button-1').click(function() {
+			console.log('test');
+			$('.contents').fadeOut(function() {
+				$.post('/create?image=keshavdv/izanamee', function(data){
+				var iframe = $('<iframe src="/term?taskId=' + data.taskId + '" frameborder="0" scrolling="no"></iframe>');
+				$('.contents').html(iframe).hide().fadeIn();
+				})
+			})
+		})
+
