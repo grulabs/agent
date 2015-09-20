@@ -46,7 +46,7 @@ module.exports = function (io) {
                     exec.start({stdin: true}, function(err, stream) {
                       if (err) return;
                       // stream.write('ls');
-                      stream.setEncoding('utf8');
+                      // stream.setEncoding('utf8');
                       stream.pipe(streamHandler.writable(socket));
                       streamHandler.readable(socket).pipe(stream);
                       // stream.pipe(process.stdout);

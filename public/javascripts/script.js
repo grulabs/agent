@@ -38,8 +38,8 @@ $(function() {
     var rc = textSize();
     console.log(rc);
     var term = new Terminal({
-      rows: 48,
-      cols: 160,
+      rows: 40,
+      cols: 80,
       convertEol: true,
       useStyle: true,
       screenKeys: true,
