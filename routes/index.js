@@ -40,6 +40,10 @@ function createContainer(id, image, args, cb){
 						{
 							name: 'DC_TASK_ID',
 							value: task_id
+						},
+						{
+							name: 'TERM',
+							value: 'xterm'
 						}
 					],
 			      }
