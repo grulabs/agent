@@ -34,7 +34,8 @@ block content
 						var loading = $('<p class="loading">' + msg + '</p>');
 						$('.contents').html(loading).hide().fadeIn();
 						console.log('loop');
-						$.post('/status?taskId=' + data.id, function(data) {
+						$.get('/status?taskId=' + data.id, function(data) {
+							console.log(data);
 							if(data.status == "running") {
 								var iframe = $('<h1 class="logo">Gru</h1><iframe src="/term?taskId=' + data.id + '" frameborder="0" scrolling="no"></iframe>');
 								$('.contents').fadeOut().html(iframe).hide().fadeIn();
