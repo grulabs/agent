@@ -28,7 +28,6 @@ module.exports = function (io) {
           var container = docker.getContainer(containerInfo.Id)
           container.inspect(function (err, data) {
             
-            
             data.Config.Env.forEach(function (envVar) {
               var splitVar = envVar.split('=');
               if (splitVar[0] === 'DC_TASK_ID') {
@@ -46,10 +45,8 @@ module.exports = function (io) {
 
                     exec.start({stdin: true}, function(err, stream) {
                       if (err) return;
-                      // stream.write('ls');
-                      // stream.setEncoding('utf8');
-                      stream.pipe(streamHandler.writable(socket));
-                      // stream.pipe(process.stdout);
+                      var write = streamHandler.writable(socket)
+                      container.modem.demuxStream(stream, write, write);
                       streamHandler.readable(socket).pipe(stream);
                     });
                     
