@@ -146,6 +146,31 @@ router.post('/port', function(req, res, next) {
       });
     });
   });
-})
+});
+
+router.get('/status', function(req, res, next) {
+  var docker = new Docker();
+  var taskId = req.query.taskId;
+  docker.listContainers(function (err, containers) {
+    console.log(containers);
+    var c = containers.length;
+    containers.forEach(function(containerInfo) {
+      c--;
+      var container = docker.getContainer(containerInfo.Id);
+      container.inspect(function(err, data) {
+        data.Config.Env.forEach(function (envVar) {
+          var splitVar = envVar.split('=');
+          if (splitVar[0] === 'DC_TASK_ID') {
+            if (splitVar[1] === taskId) {
+              res.json({status: 'running'});
+            } else if (c === 0) {
+              res.json({status: 'failed'});
+            }
+          }
+        });
+      })
+    })
+  })
+});
 
 module.exports = router;
