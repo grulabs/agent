@@ -83,8 +83,8 @@ function stopTask(params, cb) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  var taskId = req.query.taskId;
-  res.render('index', { title: 'Express' , taskId: taskId});
+  var image = req.query.image || 'keshavdv/izanamee';
+  res.render('index', { title: 'Express' , image: image});
 });
 
 /* GET home page. */

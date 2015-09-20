@@ -28,7 +28,7 @@ block content
 						 'Walking Kyle around the block...'
 						 ];
 			$('.contents').fadeOut(function() {
-				$.post('/create?image=keshavdv/izanamee', function(data){
+				$.post('/create?image=#{image}', function(data){
 					var retry = setInterval(function(){
 						msg = msgs[Math.floor(Math.random()*msgs.length)]
 						var loading = $('<p class="loading">' + msg + '</p>');
