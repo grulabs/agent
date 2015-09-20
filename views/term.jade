@@ -3,7 +3,7 @@ extends layout
 block content
   //- h1= title
   //- p Welcome to #{title}
-  script(src='/javascripts/script.js')
   script.
       var socket = io('http://' + location.host, {query: 'taskId=#{taskId}'});
+  script(src='/javascripts/script.js')
   #terminal

@@ -10,15 +10,15 @@ block content
 		$('.button-1').click(function() {
 			console.log('test');
 			$('.contents').fadeOut(function() {
-				$.post('/create?image=keshavdv/izanamee', function(data){
+				//- $.post('/create?image=keshavdv/izanamee', function(data){
 					var loading = $('<p class="loading">Performing magic...</p>');
 					$('.contents').html(loading).hide().fadeIn();
 					setTimeout(function(){ 
-						var iframe = $('<h1 class="logo">Whatever</h1><iframe src="/term?taskId=' + data.id + '" frameborder="0" scrolling="no"></iframe>');
+						var iframe = $('<h1 class="logo">Whatever</h1><iframe src="/term?taskId=' + "satya" + '" frameborder="0" scrolling="no"></iframe>');
 						$('.contents').fadeOut().html(iframe).hide().fadeIn();
-					}, 5000);
+					}, 000);
 				
-				})
+				//- })
 			})
 		})
 

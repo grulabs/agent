@@ -43,11 +43,14 @@ module.exports = function (io) {
                   container.exec(opts, function (err, exec) {
                     if (err) return;
 
+
                     exec.start({stdin: true}, function(err, stream) {
                       if (err) return;
-                      var write = streamHandler.writable(socket)
-                      container.modem.demuxStream(stream, write, write);
-                      streamHandler.readable(socket).pipe(stream);
+                      exec.resize({h: 46, w: 120}, function(){
+                        var write = streamHandler.writable(socket)
+                        container.modem.demuxStream(stream, write, write);
+                        streamHandler.readable(socket).pipe(stream);
+                      });
                     });
                     
                   });
