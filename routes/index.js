@@ -67,6 +67,13 @@ function launchTask(params, cb) {
 	});
 }
 
+function stopTask(params, cb) {
+	ecs.stopTask(params, function(err, data) {
+	  if (err) cb(err);
+	  else cb(null, data);
+	});
+}
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -76,9 +83,22 @@ router.get('/', function(req, res, next) {
 router.post('/create', function(req, res, next) {
 	task_id = uuid.v4();
 	createContainer(task_id, req.query.image, {cmd: ['sleep', 'infinity']}, function(err, data){
-		if (err) res.json({'status': 'failed', 'message': err.stack});
+		if (err) res.status(500).json({'status': 'failed', 'message': err.stack});
 		else {
 			res.json({'status': 'success', 'id': task_id, 'message': data});
+		}
+	});
+});
+
+router.post('/delete', function(req, res, next) {
+	var params = {
+		task: req.query.id, /* required */
+		cluster: 'default'
+	};
+	stopTask(params, function(err, data){
+		if (err) res.status(500).json({'status': 'failed', 'message': err.stack});
+		else {
+			res.json({'status': 'success', 'message': data});
 		}
 	});
 });
