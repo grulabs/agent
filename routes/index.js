@@ -87,6 +87,12 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' , taskId: taskId});
 });
 
+/* GET home page. */
+router.get('/term', function(req, res, next) {
+  var taskId = req.query.taskId;
+  res.render('term', { title: 'Express' , taskId: taskId});
+});
+
 /* Launch container */
 router.post('/create', function(req, res, next) {
 	task_id = uuid.v4();
