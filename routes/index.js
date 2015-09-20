@@ -76,7 +76,8 @@ function stopTask(params, cb) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  var taskId = req.query.taskId;
+  res.render('index', { title: 'Express' , taskId: taskId});
 });
 
 /* Launch container */
