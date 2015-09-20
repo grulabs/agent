@@ -57,6 +57,7 @@ $(function() {
     term.write('\x1b[31mWelcome to term.js!\x1b[m\r\n');
 
     socket.on('data', function(evt) {
+      console.log(evt);
       term.write(evt);
     })
     socket.on('disconnect', function(evt) {
