@@ -163,6 +163,7 @@ router.get('/status', function(req, res, next) {
           if (splitVar[0] === 'DC_TASK_ID') {
             if (splitVar[1] === taskId) {
               res.json({status: 'running'});
+              c = -1;
             } else if (c === 0) {
               res.json({status: 'failed'});
             }
