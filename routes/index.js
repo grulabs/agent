@@ -3,7 +3,7 @@ var router = express.Router();
 var Docker = require('dockerode');
 var uuid = require('node-uuid');
 var AWS = require('aws-sdk');
-var ecs = new AWS.ECS({apiVersion: '2014-11-13', region: 'us-east-1'});
+var ecs = new AWS.ECS({apiVersion: '2014-11-13', region: 'us-west-2'});
 var findPort = require('find-port');
 
 var counter = 0;
