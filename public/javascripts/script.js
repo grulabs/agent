@@ -4,10 +4,6 @@ $(function() {
   //   console.log(data.data)
   // })
 
-  $('body').on('click', function () {
-    // socket.emit('data', 'lala')
-    console.log('clicked')
-  })
   function getCharSize() {
     var $span = $("<span>", {text: "qwertyuiopasdfghjklzxcvbnm"});
     $('#terminal').append($span);
@@ -42,8 +38,8 @@ $(function() {
     var rc = textSize();
     console.log(rc);
     var term = new Terminal({
-      rows: rc.y,
-      cols: rc.x,
+      rows: 48,
+      cols: 160,
       convertEol: true,
       useStyle: true,
       screenKeys: true,
@@ -57,9 +53,10 @@ $(function() {
       document.title = title;
     });
     term.open(document.body);
+    
     term.write('\x1b[31mWelcome to term.js!\x1b[m\r\n');
+
     socket.on('data', function(evt) {
-      console.log(evt);
       term.write(evt);
     })
     socket.on('disconnect', function(evt) {
