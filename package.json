@@ -12,6 +12,7 @@
     "debug": "~2.2.0",
     "dockerode": "^2.2.2",
     "express": "~4.13.1",
+    "find-port": "^1.0.1",
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
     "node-uuid": "^1.4.3",

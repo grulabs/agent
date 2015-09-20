@@ -4,6 +4,7 @@ var Docker = require('dockerode');
 var uuid = require('node-uuid');
 var AWS = require('aws-sdk');
 var ecs = new AWS.ECS({apiVersion: '2014-11-13', region: 'us-east-1'});
+var findPort = require('find-port');
 
 function createContainer(id, image, args, cb){
 
@@ -103,5 +104,35 @@ router.post('/delete', function(req, res, next) {
 		}
 	});
 });
+
+router.post('/port', function(req, res, next) {
+  var docker = new Docker();
+  var port = req.query.port;
+  var taskId = req.query.taskId;
+  docker.listContainers(function (err, containers) {
+    containers.forEach(function (containerInfo) {
+      var container = docker.getContainer(containerInfo.Id)
+      container.inspect(function (err, data) {
+        data.Config.Env.forEach(function (envVar) {
+          var splitVar = envVar.split('=');
+          if (splitVar[0] === 'DC_TASK_ID') {
+            if (splitVar[1] === taskId) {
+              var ipAddr = data.NetworkSettings.IPAddress
+              findPort(50000, 60000, function(ports) {
+                  var cmd = 'sudo iptables -t nat -A  DOCKER -p tcp --dport ' + port + '-j DNAT --to-destination ' + ipAddr + ':' + ports[0];
+                  var exec = require('child_process').exec;
+                  console.log(cmd);
+                  exec(cmd, function (err, stdout, stderr) {
+                    if (!err) console.log('error: ' + err);
+                    res.json({port: ports[0]});
+                  });
+              });
+            }
+          }
+        });
+      });
+    });
+  });
+})
 
 module.exports = router;

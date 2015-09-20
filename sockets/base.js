@@ -27,11 +27,12 @@ module.exports = function (io) {
         containers.forEach(function (containerInfo) {
           var container = docker.getContainer(containerInfo.Id)
           container.inspect(function (err, data) {
+            
+            
             data.Config.Env.forEach(function (envVar) {
               var splitVar = envVar.split('=');
               if (splitVar[0] === 'DC_TASK_ID') {
                 if (splitVar[1] === taskId) {
-                  console.log('found it!');
                   var opts = {
                     AttachStdin: true,
                     AttachStdout: true,
@@ -48,22 +49,14 @@ module.exports = function (io) {
                       // stream.write('ls');
                       // stream.setEncoding('utf8');
                       stream.pipe(streamHandler.writable(socket));
-                      streamHandler.readable(socket).pipe(stream);
                       // stream.pipe(process.stdout);
+                      streamHandler.readable(socket).pipe(stream);
                     });
                     
                   });
                 }
               }
-            })
-            // forEach(function (envVar) {
-            //   envVars = envVar.split('=');
-            //   if (envVars[0] === 'DC_TASK_ID') {
-            //     if (envVars[1] === taskId) {
-            //       cb()
-            //     }
-            //   }
-            // });
+            });
           });
         });
       });
