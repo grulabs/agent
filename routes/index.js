@@ -17,7 +17,7 @@ function createContainer(id, image, args, cb){
 			cpu: args.cpu || 1,
 			essential: true ,
 			image: image,
-			memory: args.memory || 100,
+			memory: args.memory || 512,
 			name: 'user-container',
 	    },
 	  ],
