@@ -75,7 +75,7 @@ router.get('/', function(req, res, next) {
 /* Launch container */
 router.post('/create', function(req, res, next) {
 	task_id = uuid.v4();
-	createContainer(task_id, req.body.image, {cmd: ['sleep', 'infinity']}, function(err, data){
+	createContainer(task_id, req.query.image, {cmd: ['sleep', 'infinity']}, function(err, data){
 		if (err) res.json({'status': 'failed', 'message': err.stack});
 		else {
 			res.json({'status': 'success', 'id': task_id, 'message': data});
