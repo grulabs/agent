@@ -11,9 +11,11 @@ block content
 			console.log('test');
 			$('.contents').fadeOut(function() {
 				$.post('/create?image=keshavdv/izanamee', function(data){
+					var loading = $('<p class="loading">Performing magic...</p>');
+					$('.contents').html(iframe).hide().fadeIn();
 					setTimeout(function(){ 
-						var iframe = $('<iframe src="/term?taskId=' + data.id + '" frameborder="0" scrolling="no"></iframe>');
-						$('.contents').html(iframe).hide().fadeIn();
+						var iframe = $('<h1 class="logo">Whatever</h1><iframe src="/term?taskId=' + data.id + '" frameborder="0" scrolling="no"></iframe>');
+						$('.contents').fadeOut().html(iframe).hide().fadeIn();
 					}, 5000);
 				
 				})

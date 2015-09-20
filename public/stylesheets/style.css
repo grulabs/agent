@@ -27,6 +27,15 @@ html {
 
 }
 
+.loading {
+    color: white;
+    font-size: 22px;
+}
+
+.logo {
+	color: white;
+}
+
 body {
   background: linear-gradient(540deg,#24b8eb 4%,#218cf4 100%);
    /* Chrome 10+, Saf5.1+ */
