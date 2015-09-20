@@ -54,7 +54,7 @@ $(function() {
     });
     term.open(document.body);
     
-    term.write('\x1b[31mWelcome to term.js!\x1b[m\r\n');
+    term.write('\x1b[31mHave fun!\x1b[m\r\n');
 
     socket.on('data', function(evt) {
       console.log(evt);
